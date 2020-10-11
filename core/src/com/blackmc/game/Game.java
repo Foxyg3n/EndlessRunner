@@ -7,27 +7,31 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Game extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
-	
+	DeltaClock clock;
+	Scene scene;
+
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("blackmc.png");
+		clock = new DeltaClock();
+		scene = new Scene();
+
+		scene.add(new Player());
 	}
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+	    // update
+		float dt = clock.getDeltaTime();
+		scene.update(dt);
+
+		// render
+		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+		scene.draw();
 	}
 	
 	@Override
 	public void dispose () {
-		batch.dispose();
-		img.dispose();
+	    scene.dispose();
 	}
 }
