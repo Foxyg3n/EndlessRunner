@@ -3,6 +3,8 @@ package com.blackmc.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Game extends ApplicationAdapter {
     DeltaClock clock;
@@ -13,7 +15,15 @@ public class Game extends ApplicationAdapter {
         clock = new DeltaClock();
         scene = new Scene();
 
-        scene.add(new Ground());
+        Sprite ground_back = new Sprite(new Texture("badlogic.jpg"));
+        ground_back.setSize(1280, 100);
+        ground_back.setPosition(0, 30);
+        scene.add(new ScrollingBackground(ground_back, 60));
+
+        Sprite ground_front = new Sprite(new Texture("badlogic.jpg"));
+        ground_front.setSize(640, 56);
+        scene.add(new ScrollingBackground(ground_front, 80));
+
         scene.add(new Player());
     }
 
