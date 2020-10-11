@@ -12,8 +12,8 @@ import java.util.Random;
 public class Player extends Entity {
     Sprite sprite;
 
-    final float SPEED = 500;
-    final float GRAVITY = 10;
+    final float SPEED = 200;
+    final float GRAVITY = 20;
 
     Vector2 pos, vel, acc;
 
@@ -36,16 +36,21 @@ public class Player extends Entity {
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP))
             acc.y += SPEED * deltaTime;
 
+
         // applying force
         vel.add(acc.x, acc.y);
         pos.add(vel);
+
+        if(pos.y < 5) {
+            pos.y = 5;
+            vel.y = 0;
+            acc.y = 0;
+        }
 
         // gravity
         acc.add(0, -GRAVITY * deltaTime);
         acc.set(acc.x * 0.97f, acc.y * 0.3f);
 
-        if(pos.y < 5) pos.y = 5;
-     
         sprite.setPosition(pos.x, pos.y);
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
