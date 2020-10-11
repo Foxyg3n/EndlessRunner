@@ -12,8 +12,8 @@ import java.util.Random;
 public class Player extends Entity {
     Sprite sprite;
 
-    final float SPEED = 10;
-    final float GRAVITY = 1;
+    final float SPEED = 500;
+    final float GRAVITY = 10;
 
     Vector2 pos, vel, acc;
 
@@ -33,7 +33,7 @@ public class Player extends Entity {
 
     @Override
     public void update(float deltaTime) {
-        if(Gdx.input.isKeyPressed(Input.Keys.UP))
+        if(Gdx.input.isKeyJustPressed(Input.Keys.UP))
             acc.y += SPEED * deltaTime;
 
         // applying force
@@ -42,7 +42,7 @@ public class Player extends Entity {
 
         // gravity
         acc.add(0, -GRAVITY * deltaTime);
-        acc.set(acc.x * 0.9f, acc.y * 0.9f);
+        acc.set(acc.x * 0.97f, acc.y * 0.3f);
 
         if(pos.y < 5) pos.y = 5;
      
