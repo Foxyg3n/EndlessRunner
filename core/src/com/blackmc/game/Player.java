@@ -15,9 +15,13 @@ public class Player extends Entity {
     float posX;
     float posY;
 
+    final float ROTATION_SPEED = 50;
+    float rotation = 0;
+
     @Override
     public void create() {
         sprite = new Sprite(new Texture("badlogic.jpg"));
+
         sprite.setOrigin(sprite.getWidth()/2, sprite.getHeight()/2);
         sprite.setScale(0.5f);
 
@@ -40,8 +44,10 @@ public class Player extends Entity {
 
         sprite.setPosition(posX, posY);
 
+        sprite.setRotation(rotation+=ROTATION_SPEED*deltaTime);
+
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            scene.add(new Player());
+            scene.remove(this);
         }
     }
 
