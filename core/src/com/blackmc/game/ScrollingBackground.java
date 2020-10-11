@@ -17,10 +17,10 @@ public class ScrollingBackground extends Entity {
         this.speed = speed;
 
         sprite1 = new Sprite(sprite);
-        sprite1.setSize(maxOffset, 50);
+        sprite1.setSize(maxOffset, sprite1.getHeight());
 
         sprite2 = new Sprite(sprite);
-        sprite2.setSize(maxOffset, 50);
+        sprite2.setSize(maxOffset, sprite2.getHeight());
     }
 
     @Override

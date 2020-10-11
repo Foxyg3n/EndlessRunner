@@ -15,14 +15,13 @@ public class Game extends ApplicationAdapter {
         clock = new DeltaClock();
         scene = new Scene();
 
-        Sprite ground_back = new Sprite(new Texture("badlogic.jpg"));
-        ground_back.setSize(1280, 100);
-        ground_back.setPosition(0, 30);
-        scene.add(new ScrollingBackground(ground_back, 60));
+        Sprite ground_back = new Sprite(new Texture("mountains.png"));
+        ground_back.setSize(640, 200);
+        scene.add(new ScrollingBackground(ground_back, 50));
 
-        Sprite ground_front = new Sprite(new Texture("badlogic.jpg"));
-        ground_front.setSize(640, 56);
-        scene.add(new ScrollingBackground(ground_front, 80));
+        Sprite ground_front = new Sprite(new Texture("ground.png"));
+        ground_front.setSize(640, 110);
+        scene.add(new ScrollingBackground(ground_front, 100));
 
         scene.add(new Player());
     }
