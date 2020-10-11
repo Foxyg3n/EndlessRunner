@@ -13,7 +13,7 @@ public class DeltaClock {
         lastTime = currentTime;
 
         // converting nanoseconds to seconds
-        return deltaTime / 998_000_000;
+        return deltaTime / 1000000000;
     }
 }
 
