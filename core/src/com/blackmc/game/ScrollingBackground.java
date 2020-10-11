@@ -31,10 +31,13 @@ public class ScrollingBackground extends Entity {
     @Override
     public void update(float deltaTime) {
         offset += speed * deltaTime;
-        if(offset > maxOffset) offset = 0;
+        if(offset > maxOffset) { 
+            offset = 0;
+        }
 
         sprite1.setPosition(-offset, sprite1.getY());
-        sprite2.setPosition(-offset+maxOffset, sprite2.getY());
+        // flooring the offset prevents flickering
+        sprite2.setPosition((float)Math.floor(-offset+maxOffset), sprite2.getY());
     }
 
     @Override

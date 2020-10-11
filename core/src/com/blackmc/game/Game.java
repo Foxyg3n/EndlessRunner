@@ -16,11 +16,11 @@ public class Game extends ApplicationAdapter {
         scene = new Scene();
 
         Sprite ground_back = new Sprite(new Texture("mountains.png"));
-        ground_back.setSize(640, 200);
+        ground_back.setSize(640, 250);
         scene.add(new ScrollingBackground(ground_back, 50));
 
         Sprite ground_front = new Sprite(new Texture("ground.png"));
-        ground_front.setSize(640, 110);
+        ground_front.setSize(640, 200);
         scene.add(new ScrollingBackground(ground_front, 100));
 
         scene.add(new Player());

@@ -11,53 +11,50 @@ public class Player extends Entity {
     Sprite sprite;
 
     final float SPEED = 200;
-    final float GRAVITY = 20;
+    final float GRAVITY = -20;
+    final float AIR_RESISTANCE = 0.7f;
+    final float GROUND_LEVEL = 100.0f;
 
-    Vector2 pos, vel, acc;
+    Vector2 position, velocity, acceleration;
 
     @Override
     public void create() {
-        pos = new Vector2(150, 150);
-        vel = new Vector2(0, 0);
-        acc = new Vector2(0, 0);
+        position = new Vector2(150, 150);
+        velocity = new Vector2(0, 0);
+        acceleration = new Vector2(0, 0);
 
         sprite = new Sprite(new Texture("blackmc.png"));
-
-        sprite.setOrigin(sprite.getWidth()/2, sprite.getHeight()/2);
-        sprite.setScale(0.5f);
-
-        sprite.setPosition(pos.x, pos.y);
+        sprite.setSize(100, 100);
     }
 
     @Override
     public void update(float deltaTime) {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.UP))
-            acc.y += SPEED * deltaTime;
-
-
-        // applying force
-        vel.add(acc.x, acc.y);
-        pos.add(vel);
-
-        if(pos.y < 5) {
-            pos.y = 5;
-            vel.y = 0;
-            acc.y = 0;
+        if(Gdx.input.isKeyJustPressed(Input.Keys.UP) ||
+           Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            acceleration.y += SPEED * deltaTime;
         }
 
-        // gravity
-        acc.add(0, -GRAVITY * deltaTime);
-        acc.set(acc.x * 0.97f, acc.y * 0.3f);
+        // applying the acceleration
+        velocity.add(acceleration.x, acceleration.y);
+        position.add(velocity);
 
-        sprite.setPosition(pos.x, pos.y);
-
-        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            scene.remove(this);
+        if(position.y < GROUND_LEVEL) {
+            position.y = GROUND_LEVEL;
+            velocity.y = 0;
+            acceleration.y = 0;
         }
+
+        // applying gravity
+        acceleration.add(0, GRAVITY * deltaTime);
+        // applying air resistance
+        acceleration.set(acceleration.x * (1.0f - AIR_RESISTANCE), 
+                         acceleration.y * (1.0f - AIR_RESISTANCE));
+        // adjusting sprite's position
+        sprite.setPosition(position.x, position.y);
     }
 
     @Override
     public void draw(SpriteBatch batch) {
-        sprite.draw(batch, 1);
+        sprite.draw(batch);
     }
 }
