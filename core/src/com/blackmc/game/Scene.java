@@ -1,7 +1,6 @@
 package com.blackmc.game;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
